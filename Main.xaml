@@ -57,13 +57,6 @@
 				<controls:HamburgerMenu.ItemsSource>
 					<controls:HamburgerMenuItemCollection>
 					
-						<controls:HamburgerMenuIconItem Icon="{StaticResource appbar_globe }"
-								Label="GeoMap">
-							<controls:HamburgerMenuIconItem.Tag>
-								<Grid x:Name="GeoMapView"></Grid>
-							</controls:HamburgerMenuIconItem.Tag>
-						</controls:HamburgerMenuIconItem>
-					
 						<controls:HamburgerMenuIconItem Icon="{StaticResource appbar_graph_line }"
 														Label="Line Chart">
 							<controls:HamburgerMenuIconItem.Tag>

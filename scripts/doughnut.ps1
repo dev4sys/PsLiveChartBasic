@@ -1,42 +1,55 @@
 
+
+$Processes = Get-Process | Sort-Object -Property WS | Select-Object Name,WS,ID -Last 5 
+
+
+# observablCollection is easier to handle :)
+$script:observableCollection = [System.Collections.ObjectModel.ObservableCollection[Object]]::new()
+
+
+####################################
+# FIRST APPROACH
+####################################
+
+
 $DoughnutCollection = [LiveCharts.SeriesCollection]::new()
 
-$chartvalue1 = [LiveCharts.ChartValues[LiveCharts.Defaults.ObservableValue]]::new()
-$pieSeries = [LiveCharts.Wpf.PieSeries]::new()
-$chartvalue1.Add([LiveCharts.Defaults.ObservableValue]::new(8))
-$pieSeries.Values = $chartvalue1
-$pieSeries.Title = "Chrome"
-$pieSeries.DataLabels = $true
+foreach ($proc in $Processes){
 
-$DoughnutCollection.Add($pieSeries)
+    $chartvalue1 = [LiveCharts.ChartValues[LiveCharts.Defaults.ObservableValue]]::new()
+    $pieSeries = [LiveCharts.Wpf.PieSeries]::new()
 
+    $value = $proc.WS/1MB
+    $label = $proc.Name.ToString()
 
-$chartvalue2 = [LiveCharts.ChartValues[LiveCharts.Defaults.ObservableValue]]::new()
-$pieSeries = [LiveCharts.Wpf.PieSeries]::new()
-$chartvalue2.Add([LiveCharts.Defaults.ObservableValue]::new(6))
-$pieSeries.Values = $chartvalue2
-$pieSeries.Title = "Mozilla"
-$pieSeries.DataLabels = $true
+    $chartvalue1.Add([LiveCharts.Defaults.ObservableValue]::new($value))
 
-$DoughnutCollection.Add($pieSeries)
+    $pieSeries.Values = $chartvalue1
+    $pieSeries.Title = $label
+    $pieSeries.DataLabels = $true
 
+    $DoughnutCollection.Add($pieSeries)
 
-$chartvalue3 = [LiveCharts.ChartValues[LiveCharts.Defaults.ObservableValue]]::new()
-$pieSeries = [LiveCharts.Wpf.PieSeries]::new()
-$chartvalue3.Add([LiveCharts.Defaults.ObservableValue]::new(10))
-$pieSeries.Values = $chartvalue3
-$pieSeries.Title = "Opera"
-$pieSeries.DataLabels = $true
+}
 
 
-$DoughnutCollection.Add($pieSeries)
+####################################
+# SECOND APPROACH
+####################################
 
-$chartvalue4 = [LiveCharts.ChartValues[LiveCharts.Defaults.ObservableValue]]::new()
-$pieSeries = [LiveCharts.Wpf.PieSeries]::new()
-$chartvalue4.Add([LiveCharts.Defaults.ObservableValue]::new(4))
-$pieSeries.Values = $chartvalue4
-$pieSeries.Title = "Explorer"
-$pieSeries.DataLabels = $true
+$DoughnutCollection = [LiveCharts.SeriesCollection]::new()
+
+$Processes2 = Get-Process | Sort-Object -Property WS | Select-Object Name,WS -Last 5 
+
+[LiveCharts.Helpers.Extentions]::AsSeriesCollection()
 
 
-$DoughnutCollection.Add($pieSeries)
+
+
+
+#$toto = [System.Collections.Generic.IEnumerable[Object]]$Processes
+
+#$test = [LiveCharts.Helpers.Extentions]::AsChartValues($toto)
+
+
+
