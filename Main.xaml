@@ -64,6 +64,13 @@
 							</controls:HamburgerMenuIconItem.Tag>
 						</controls:HamburgerMenuIconItem>
 						
+						<controls:HamburgerMenuIconItem Icon="{StaticResource appbar_graph_line }"
+														Label="Bar Chart">
+							<controls:HamburgerMenuIconItem.Tag>
+								<Grid x:Name="BarChartView"></Grid>
+							</controls:HamburgerMenuIconItem.Tag>
+						</controls:HamburgerMenuIconItem>
+						
 						<controls:HamburgerMenuIconItem Icon="{StaticResource appbar_lifesaver}"
 														Label="Doughnut">
 							<controls:HamburgerMenuIconItem.Tag>
