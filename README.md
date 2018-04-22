@@ -1,4 +1,5 @@
-# PsLiveChart
-Powershell with LiveChart (https://github.com/Live-Charts/Live-Charts)
+# PsLiveChartBasic
 
-![alt text](https://raw.githubusercontent.com/dev4sys/PsLiveChart/master/screenshot.gif)
+This is just a draft for now. 
+
+![alt text]()
